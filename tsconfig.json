@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es3",
+        "noImplicitAny": false,
+        "outDir": "built",
+        "rootDir": ".",
+        "sourceMap": false,
+        "jsx": "react",
+        "jsxFactory": "h"
+    },
+    "files": [
+        "src/index.tsx"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "types" : ["node", "requirejs"]
+}

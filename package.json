@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "snabbdom": "^0.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.52",
+    "typescript": "^2.1.4",
+    "webpack": "^1.14.0"
+  },
+  "name": "cyan",
+  "version": "0.0.0",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules/.bin/tsc -p ./tsconfig.json -w",
+    "bundle": "webpack -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anpek/cyan.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anpek/cyan/issues"
+  },
+  "homepage": "https://github.com/anpek/cyan#readme",
+  "description": ""
+}
