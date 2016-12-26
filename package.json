@@ -1,6 +1,6 @@
 {
   "name": "cyan",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./dist/index.js",
   "files": [
     "dist"
@@ -14,7 +14,7 @@
     "build:w": "rimraf built && node_modules/.bin/tsc -p ./tsconfig.json -w",
     "bundle": "webpack",
     "bundle:w": "webpack -w",
-    "prepublish": "npm run build && npm bundle"
+    "prepublish": "npm run build && npm run bundle"
   },
   "dependencies": {
     "snabbdom": "^0.5.4"
