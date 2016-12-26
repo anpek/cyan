@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './built/src/index.js',
+    entry: './built/src/cyan.js',
     output: {
         filename: 'index.js',
         path: './dist'
