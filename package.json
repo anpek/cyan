@@ -1,20 +1,28 @@
 {
+  "name": "cyan",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "cyan-reactor": "./scripts/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf built && node_modules/.bin/tsc -p ./tsconfig.json -w",
+    "bundle": "webpack -w",
+    "prepublish": "npm run build && npm bundle"
+  },
   "dependencies": {
     "snabbdom": "^0.5.4"
   },
   "devDependencies": {
     "@types/node": "^6.0.52",
+    "express": "^4.14.0",
     "rimraf": "^2.5.4",
     "typescript": "^2.1.4",
     "webpack": "^1.14.0"
-  },
-  "name": "cyan",
-  "version": "0.0.0",
-  "main": "webpack.config.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf built && node_modules/.bin/tsc -p ./tsconfig.json -w",
-    "bundle": "webpack -w"
   },
   "repository": {
     "type": "git",
