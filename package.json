@@ -4,6 +4,7 @@
   },
   "devDependencies": {
     "@types/node": "^6.0.52",
+    "rimraf": "^2.5.4",
     "typescript": "^2.1.4",
     "webpack": "^1.14.0"
   },
@@ -12,7 +13,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node_modules/.bin/tsc -p ./tsconfig.json -w",
+    "build": "rimraf built && node_modules/.bin/tsc -p ./tsconfig.json -w",
     "bundle": "webpack -w"
   },
   "repository": {
