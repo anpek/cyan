@@ -3,7 +3,8 @@
   "version": "0.0.3",
   "main": "./dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "scripts"
   ],
   "bin": {
     "cyan-reactor": "./scripts/index.js"
