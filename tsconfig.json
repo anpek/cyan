@@ -10,7 +10,7 @@
         "jsxFactory": "h"
     },
     "files": [
-        "src/index.tsx"
+        "src/cyan.tsx"
     ],
     "exclude": [
         "node_modules"

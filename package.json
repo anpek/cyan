@@ -11,7 +11,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf built && node_modules/.bin/tsc -p ./tsconfig.json -w",
-    "bundle": "webpack -w",
+    "build:w": "rimraf built && node_modules/.bin/tsc -p ./tsconfig.json",
+    "bundle": "webpack",
+    "bundle:w": "webpack -w",
     "prepublish": "npm run build && npm bundle"
   },
   "dependencies": {
