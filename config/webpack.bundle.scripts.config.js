@@ -7,7 +7,8 @@ module.exports = {
     target: 'node',
     output: {
         filename: 'scripts.js',
-        path: './dist'
+        path: './dist',
+        libraryTarget: 'commonjs',
     },
     resolve: {
         extensions: ['', '.js']
@@ -23,6 +24,10 @@ module.exports = {
                 }
             }
         ]
+    }, 
+    externals: { 
+        "webpack": "webpack",
+        "express": "express" 
     },
     plugins: [
         new webpack.BannerPlugin('#!/usr/bin/env node', {raw: true, entryOnly: true})

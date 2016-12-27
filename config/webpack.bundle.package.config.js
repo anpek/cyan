@@ -5,7 +5,7 @@ module.exports = {
     context: path.resolve(__dirname, '..'),
     entry: './src/cyan.tsx',
     output: {
-        filename: '[name].js',
+        filename: 'index.js',
         path: './dist'
     },
     resolve: {
