@@ -6,10 +6,14 @@ module.exports = {
     entry: './src/cyan.tsx',
     output: {
         filename: 'index.js',
-        path: './dist'
+        path: './dist',
+        libraryTarget: 'commonjs',
     },
     resolve: {
         extensions: ['', '.ts', '.tsx', '.js']
+    },
+    externals: { 
+        "snabbdom": "snabbdom"
     },
     module: {
         loaders: [
