@@ -1,5 +1,4 @@
 var snabbdom = require('snabbdom');
-var eventListeners = require('snabbdom/modules/eventlisteners'); // attaches event listeners
 var patch = snabbdom.init([ // Init patch function with chosen modules
     require('snabbdom/modules/class'), // makes it easy to toggle classes
     require('snabbdom/modules/props'), // for setting properties on DOM elements
@@ -28,8 +27,11 @@ const upadateHierarchy = (moduleId, newModel, newVnode) => {
     ModuleHierarchy[moduleId]["vnode"] = newVnode;
 }
 
-const bootstrapFn = (moduleId, Module, mountTarget) => {
+const bootstrapFn = (moduleId, Module, mountTarget?) => {
 
+    if(!mountTarget)
+        mountTarget = document.getElementById("container");
+    
     const vnode = Module.view(Module.model);
 
     addToHierarchy(moduleId, Module, vnode);

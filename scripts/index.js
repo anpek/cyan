@@ -1,12 +1,10 @@
-#!/usr/bin/env node
-var express = require('express');
-var app = express()
 var fs = require('fs');
 var path = require('path');
-var spawn = require('child_process').spawnSync;
 var webpack = require('webpack');
+var express = require('express');
+var app = express();
 
-var webpackConfig = require('./_webpack.config.js');
+var webpackConfig = require('../config/webpack.bundle.target.config.js');
 var currentPath = process.cwd();
 var root = path.resolve(__dirname, '..');
 var files = fs.readdirSync(currentPath);
