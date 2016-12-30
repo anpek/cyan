@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     context: path.resolve(__dirname, '..'),
-    entry: './src/cyan.tsx',
+    entry: './src/cyan.ts',
     output: {
         filename: 'index.js',
         path: './dist',

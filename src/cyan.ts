@@ -5,6 +5,9 @@ var patch = snabbdom.init([ // Init patch function with chosen modules
     require('snabbdom/modules/style'), // handles styling on elements with support for animations
     require('snabbdom/modules/eventlisteners'), // attaches event listeners
 ]);
+var h = require('snabbdom/h');
+
+import { isArray, isString } from './is';
 
 let ModuleHierarchy = {
 
@@ -29,9 +32,9 @@ const upadateHierarchy = (moduleId, newModel, newVnode) => {
 
 const bootstrapFn = (moduleId, Module, mountTarget?) => {
 
-    if(!mountTarget)
-        mountTarget = document.getElementById("container");
-    
+    if (!mountTarget)
+        mountTarget = document.getElementById("cyan-app");
+
     const vnode = Module.view(Module.model);
 
     addToHierarchy(moduleId, Module, vnode);
@@ -54,10 +57,34 @@ const updateFn = (moduleId, action) => {
 
 }
 
+const createElementFn = (sel, props?, children?) => {
+
+    if (!isString(sel)) {
+        const { view, model, moduleId } = sel;
+        const vnode = view(model);
+
+        addToHierarchy(moduleId, sel, vnode);
+
+        return vnode;
+
+    } else {
+        
+        // Since h function needs children to be an Array
+        if (!isString(children) && !isArray(children)) {
+            children = [children];
+        }
+
+        h(sel, props, children);
+    }
+
+
+}
+
 
 const Cyan = {
     bootstrap: bootstrapFn,
-    update: updateFn
+    update: updateFn,
+    createElement: createElementFn
 }
 
 

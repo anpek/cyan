@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
+var chalk = require('chalk');
 var express = require('express');
 var app = express();
 
@@ -38,12 +39,12 @@ app.get('/', function (req, res) {
 files.map((fileName) => {
     return app.get(`/${fileName}`, function (req, res) {
         
-        var cb = function(res) {
+        var success = function(res) {
             var html = `<html>
                 <head>
                 </head>
                 <body>
-                    <div id="container">
+                    <div id="cyan-app">
 
                     </div>
                     <script src="index.js"> </script>
@@ -52,11 +53,24 @@ files.map((fileName) => {
             res.send(html);
         }
 
-        _bundle(fileName, cb.bind(this, res));
+        var error = function(res, errors) {
+            var html = `<html>
+                <head>
+                </head>
+                <body>
+                    <div id="cyan-app">
+                        ${errors}
+                    </div>
+                </body>
+            </html>`
+            res.send(html);
+        }
+
+        _bundle(fileName, success.bind(this, res), error.bind(this, res));
     })
 })
 
-function _bundle(fileName, cb) {    
+function _bundle(fileName, success, error) {    
     var entryFilePath = `${currentPath}/${fileName}`;
 
     webpackConfig.context = currentPath;
@@ -66,7 +80,14 @@ function _bundle(fileName, cb) {
         filename: 'index.js'
     };
 
-    webpack(webpackConfig, cb)
+    webpack(webpackConfig, (err, stats) => {
+        if(stats.hasErrors()) {
+            var errors = stats.toJson('errors-only', null, 4);
+            return error(JSON.stringify(errors));
+        }
+        
+        return success();
+    })
 }
 
 app.listen(9000, function () {
