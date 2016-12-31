@@ -5,3 +5,7 @@ export function isArray(item) {
 export function isString(item) {
     return typeof item == 'string';
 }
+
+export function isObjectEmpty(item) {
+    return Object.keys(item).length == 0;
+}

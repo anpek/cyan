@@ -7,7 +7,7 @@ var patch = snabbdom.init([ // Init patch function with chosen modules
 ]);
 var h = require('snabbdom/h');
 
-import { isArray, isString } from './is';
+import { isArray, isString, isObjectEmpty } from './is';
 
 let ModuleHierarchy = {
 
@@ -70,11 +70,11 @@ const createElementFn = (sel, props?, children?) => {
     } else {
         
         // Since h function needs children to be an Array
-        if (!isString(children) && !isArray(children)) {
+        if (!isString(children) && !isArray(children) && !isObjectEmpty(children)) {
             children = [children];
         }
 
-        h(sel, props, children);
+        return h(sel, props, children);
     }
 
 
