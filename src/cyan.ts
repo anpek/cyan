@@ -9,9 +9,9 @@ var h = require('snabbdom/h');
 
 import { isArray, isString, isObjectEmpty } from './is';
 
-let ModuleHierarchy = {
+let ModuleHierarchy = {}
 
-}
+let History = {};
 
 const addToHierarchy = (moduleId, Module, vnode) => {
 
@@ -24,6 +24,13 @@ const addToHierarchy = (moduleId, Module, vnode) => {
         vnode: vnode
     }
 }
+
+ const newHistoryEvent = (moduleId, action, model) => {
+     History[Date.now().toString()] = {moduleId, action, model};
+     var historyWindowRef = (<any>window).historyWindow;
+     if(historyWindowRef)
+        historyWindowRef.postMessage(History, 'http://localhost:9000/__history__');
+ }
 
 const upadateHierarchy = (moduleId, newModel, newVnode) => {
     ModuleHierarchy[moduleId]["model"] = newModel;
@@ -53,6 +60,8 @@ const updateFn = (moduleId, action) => {
 
     patch(Module.vnode, newVnode);
 
+    newHistoryEvent(moduleId, action, newModel);
+
     upadateHierarchy(moduleId, newModel, newVnode);
 
 }
@@ -76,7 +85,6 @@ const createElementFn = (sel, props?, children?) => {
 
         return h(sel, props, children);
     }
-
 
 }
 

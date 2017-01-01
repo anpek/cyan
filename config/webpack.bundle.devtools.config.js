@@ -3,11 +3,11 @@ var webpack = require('webpack');
 
 module.exports = {
     context: path.resolve(__dirname, '..'),
-    entry: './scripts/index.js',
+    entry: './src/devtools/cyan-reactor.js',
     target: 'node',
     output: {
-        filename: 'scripts.js',
-        path: './dist',
+        filename: 'cyan-reactor.js',
+        path: './bin',
         libraryTarget: 'commonjs',
     },
     resolve: {

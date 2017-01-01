@@ -1,4 +1,7 @@
 node_modules
 dist
+bin
 built
 npm-debug.log
+yarn-error.log
+.DS_Store
