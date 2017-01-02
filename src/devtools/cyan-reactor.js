@@ -40,13 +40,58 @@ app.get('/', function (req, res) {
 app.get('/__history__', function (req, res) {
     var html = `<html>
                 <head></head>
-                <body>
-                    <h3>History!</h3>
-                    <div id="cyan-app-history"></div>
+                <body style="margin: 0;">
+                    <div id="cyan-app-history" style="background: black; display: flex; min-width: 100vw; min-height: 100vh;">
+                        <div id="history-events" style="min-width: 20vw; min-height: 100vh; border-right: 1px solid cyan; color: cyan;">
+                        </div>
+
+                        <div id="history-snapshots" style="color: white;">
+                        </div>
+                    </div>
+                    
                     <script>
+                        
+                        function renderHistory() {
+                            var history = window.__history__;
+                            if(!history) return;
+                            
+                            var eventsRendered = "", snapshotRendered = "";
+
+                            var historyEvents = Object.keys(history).forEach(key => {
+                                var event = history[key];
+                                eventsRendered += '<div data-key="' + key + '">' + event.moduleId + '/' + event.action.type + '</div>';                                 
+                            })
+
+                            var eventsContainer =  document.getElementById("history-events");
+                            eventsContainer.innerHTML = eventsRendered;
+                        }
+
+                        function renderSnapshot(e) {
+                            debugger;
+                            var key = e.target.dataset.key;
+                            var snapshot = window.__history__[key];
+
+                            if(!snapshot) return;
+
+                            snapshotRendered = "<pre><code>" + JSON.stringify(snapshot.model) + "</pre></code>";
+                            
+                            var snapShotContainer = document.getElementById("history-snapshots");
+                            snapShotContainer.innerHTML = snapshotRendered;
+                        }
+
+                        renderHistory();
+
                         window.addEventListener('message',function(event) {                                
                             console.log('received response:  ',event.data);
-                        }, false);
+                            if(event.data)
+                                window.__history__ = event.data;
+                            
+                            renderHistory();
+                        }, false);  
+
+                        document.getElementById("history-events").addEventListener("click", renderSnapshot) 
+                        
+                        
                     </script>
                 </body>
             </html>`;
